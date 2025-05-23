@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI: A Deep Dive into Four Key Paradigms - Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* 浅灰色背景 */
+        }
+       .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* 图表默认最大宽度 */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* 基础高度 */
+            max-height: 400px; /* 最大高度 */
+        }
+        @media (min-width: 768px) {
+           .chart-container {
+                height: 350px;
+            }
+        }
+       .section-title {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            margin-bottom: 1.5rem; /* 24px */
+            text-align: center;
+        }
+       .card {
+            background-color: white;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem; /* 24px */
+            margin-bottom: 1.5rem; /* 24px */
+        }
+       .sub-heading {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600;
+            margin-bottom: 1rem; /* 16px */
+        }
+       .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem; /* 8px */
+        }
+       .flow-step {
+            background-color: #e0f2fe; /* 通用调色板中的浅蓝色 */
+            color: #0c4a6e; /* 深蓝色文本 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-width: 150px;
+        }
+       .flow-arrow {
+            font-size: 1.5rem; /* 24px */
+            color: #073B4C; /* 所选调色板中的深蓝/蓝绿色 */
+        }
+       .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+       .swot-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        /* 所选调色板：活力与趣味 (概念性 - 实际颜色如下) */
+        /* 主要: #FF6B6B (珊瑚色), 强调1: #FFD166 (橘黄色), 强调2: #06D6A0 (绿色), 强调3: #118AB2 (蓝色), 文本/深色: #073B4C (深蓝/蓝绿色) */
+       .text-coral { color: #FF6B6B; }
+       .bg-coral { background-color: #FF6B6B; }
+       .border-coral { border-color: #FF6B6B; }
+
+       .text-yellow-orange { color: #FFD166; }
+       .bg-yellow-orange { background-color: #FFD166; }
+       .border-yellow-orange { border-color: #FFD166; }
+
+       .text-green-vibrant { color: #06D6A0; }
+       .bg-green-vibrant { background-color: #06D6A0; }
+       .border-green-vibrant { border-color: #06D6A0; }
+
+       .text-blue-vibrant { color: #118AB2; }
+       .bg-blue-vibrant { background-color: #118AB2; }
+       .border-blue-vibrant { border-color: #118AB2; }
+
+       .text-dark-teal { color: #073B4C; }
+       .bg-dark-teal { background-color: #073B4C; }
+       .border-dark-teal { border-color: #073B4C; }
+
+       .highlight-stat {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem 0;
+        }
+       .icon-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+       .icon-list li span:first-child {
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+        /* 数学公式样式 */
+        .math-inline {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="text-dark-teal">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-vibrant mb-4">生成式人工智能四大范式深度解析</h1>
+            <p class="text-lg md:text-xl text-dark-teal">探索扩散模型、GAN、VAE与自回归模型的核心奥秘与未来图景</p>
+        </header>
+
+        <section id="intro-trends" class="mb-16">
+            <h2 class="section-title text-coral">1. 生成式AI概览与核心趋势</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="sub-heading text-yellow-orange">什么是生成式AI?</h3>
+                    <p>生成式人工智能（Generative AI）通过学习现有数据的模式和结构，能够创造出全新的、原创性的内容，涵盖文本、图像、音频、视频等多种形式。它代表了向通用人工智能创作（AIGC）时代迈进的关键一步，与主要执行分类或预测任务的判别式AI形成对比。本信息图聚焦于四大核心范式：扩散模型、生成对抗网络（GANs）、变分自编码器（VAEs）以及自回归模型。</p>
+                </div>
+                <div class="card">
+                    <h3 class="sub-heading text-green-vibrant">主要趋势：融合与伦理</h3>
+                    <p class="mb-2"><strong>模型融合：</strong> 各范式正从独立发展走向集成，结合不同模型的优势以克服局限性。例如，VAEs的编码器被用于潜空间扩散模型（LDMs）以降低计算复杂度，而GANs的对抗训练思想也为其他模型提供了借鉴。</p>
+                    <p><strong>伦理考量：</strong> 随着模型能力增强和应用普及，深度伪造（deepfakes）、偏见放大和潜在滥用等伦理风险日益凸显。负责任的创新，包括“设计安全”和“设计伦理”原则，变得至关重要。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="diffusion" class="mb-16">
+            <h2 class="section-title text-blue-vibrant">2. 扩散模型 (Diffusion Models)</h2>
+            <div class="card mb-8">
+                <p class="text-center text-lg mb-4">扩散模型通过逐步去噪的过程生成高质量样本，已在图像生成等领域展现出SOTA性能。</p>
+                <div class="highlight-stat text-blue-vibrant">关键成就: 在图像合成质量上超越GANs</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-coral">核心原理：迭代去噪</h3>
+                    <p class="mb-4">通过两个对称过程学习数据分布：</p>
+                    <div class="flow-diagram">
+                        <div class="flow-step bg-blue-vibrant text-white">原始数据 (x₀)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step">前向过程: 逐步加噪</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step bg-yellow-orange text-dark-teal">纯噪声 (xT)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step">反向过程: 学习去噪 (U-Net)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step bg-green-vibrant text-white">生成样本 (x̂₀)</div>
+                    </div>
+                    <p class="mt-4">模型（如U-Net）学习预测每步加入的噪声，或等价地，数据梯度的分数。</p>
+                </div>
+
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-yellow-orange">历史里程碑</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>2015:</strong> Sohl-Dickstein等首次引入扩散过程。</li>
+                        <li><strong>2020:</strong> DDPM (Ho等) 奠定现代框架。</li>
+                        <li><strong>2020:</strong> DDIM (Song等) 加速采样。</li>
+                        <li><strong>2021:</strong> "Diffusion Models Beat GANs" (Dhariwal & Nichol)。</li>
+                        <li><strong>2022:</strong> LDM (Rombach等) 如Stable Diffusion，实现高效高分辨率生成。</li>
+                    </ul>
+                </div>
+                
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-green-vibrant">应用领域主导性 (示例)</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="diffusionAppsChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-2 text-center">扩散模型在高质量图像和多模态内容生成方面表现突出。</p>
+                </div>
+
+                <div class="card md:col-span-1 lg:col-span-3">
+                     <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="sub-heading text-coral">优势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>生成质量极高，细节丰富</li>
+                                <li>训练过程相对稳定</li>
+                                <li>样本多样性好，模式覆盖广</li>
+                                <li>可控性强 (如文本到图像)</li>
+                                <li>坚实的概率理论基础</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="sub-heading text-yellow-orange">劣势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>采样速度慢 (需多次迭代)</li>
+                                <li>计算成本和资源消耗大</li>
+                                <li>对大规模高质量数据依赖强</li>
+                                <li>内部机制可解释性有限</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card lg:col-span-3">
+                    <h3 class="sub-heading text-blue-vibrant">扩散模型 SWOT 分析</h3>
+                    <div class="swot-grid">
+                        <div class="swot-item bg-green-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">优势 (Strengths)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>极高生成质量、细节丰富</li>
+                                <li>训练稳定，不易模式崩溃</li>
+                                <li>样本多样性好，模式覆盖广</li>
+                                <li>可控性强 (文本引导等)</li>
+                                <li>坚实的概率理论基础</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-coral text-white">
+                            <h4 class="font-bold text-xl mb-2">劣势 (Weaknesses)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>采样速度慢 (迭代过程)</li>
+                                <li>计算成本高，资源消耗大</li>
+                                <li>依赖大规模、高质量训练数据</li>
+                                <li>内部机制可解释性有限</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-blue-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">机遇 (Opportunities)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>开发更快的采样算法与高效架构</li>
+                                <li>扩展至更高分辨率和复杂数据</li>
+                                <li>增强细粒度可控性</li>
+                                <li>深化理论理解与模型融合</li>
+                                <li>拓展新应用领域 (机器人、科学)</li>
+                                <li>集成新兴技术 (量子计算、边缘AI)</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-yellow-orange text-dark-teal">
+                            <h4 class="font-bold text-xl mb-2">威胁 (Threats)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>伦理风险 (偏见、深度伪造、版权)</li>
+                                <li>内容验证与检测技术的挑战</li>
+                                <li>评估指标的局限性</li>
+                                <li>持续的高资源需求可能限制普及</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card md:col-span-1 lg:col-span-2">
+                    <h3 class="sub-heading text-green-vibrant">主要应用</h3>
+                    <ul class="icon-list">
+                        <li><span>🖼️</span>图像合成 (DALL-E 2, Imagen, Stable Diffusion)</li>
+                        <li><span>✍️</span>文本到图像生成</li>
+                        <li><span>🎬</span>视频生成</li>
+                        <li><span>🎵</span>音频与语音合成</li>
+                        <li><span>🧊</span>3D内容生成</li>
+                        <li><span>💊</span>药物发现与分子设计</li>
+                        <li><span>🩺</span>医学图像分析 (增强、重建)</li>
+                    </ul>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-1">
+                    <h3 class="sub-heading text-blue-vibrant">未来趋势</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>提升采样效率与速度</li>
+                        <li>增强可扩展性 (更高分辨率)</li>
+                        <li>更精细的可控性</li>
+                        <li>深化理论理解</li>
+                        <li>探索新应用 (机器人、时间序列)</li>
+                        <li>伦理考量与模型融合</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="gans" class="mb-16">
+            <h2 class="section-title text-coral">3. 生成对抗网络 (GANs)</h2>
+            <div class="card mb-8">
+                <p class="text-center text-lg mb-4">GANs通过生成器和判别器的对抗博弈生成逼真样本，尤其在图像清晰度方面表现优异。</p>
+                <div class="highlight-stat text-coral">关键成就: 生成高锐度、逼真图像的先驱</div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-yellow-orange">核心原理：对抗博弈</h3>
+                    <div class="flow-diagram">
+                        <div class="flow-step bg-coral text-white">随机噪声 (z)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step">生成器 (G) "伪造者"</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step bg-yellow-orange text-dark-teal">伪造样本 G(z)</div>
+                        <div class="flow-arrow">↘️</div>
+                        <div class="flow-step bg-dark-teal text-white" style="margin-top:-2.5rem;">判别器 (D) "侦探" <br/> (区分真伪)</div>
+                        <div class="flow-arrow">↙️</div>
+                        <div class="flow-step bg-green-vibrant text-white">真实样本 (x)</div>
+                         <div class="flow-arrow mt-2">⬇️</div>
+                         <div class="flow-step">反馈信号 (更新G和D)</div>
+                    </div>
+                    <p class="mt-4">G试图生成“欺骗”D的样本，D试图准确区分。两者在竞争中共同进化。</p>
+                </div>
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-green-vibrant">历史里程碑</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>2014:</strong> Goodfellow等提出GANs。</li>
+                        <li><strong>2015:</strong> DCGAN 稳定卷积GAN训练。</li>
+                        <li><strong>2014-2017:</strong> cGAN, WGAN 提升可控性与稳定性。</li>
+                        <li><strong>2017-2018:</strong> StyleGAN, CycleGAN, BigGAN 等专用架构涌现。</li>
+                    </ul>
+                </div>
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-blue-vibrant">应用领域主导性 (示例)</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="ganAppsChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-2 text-center">GANs在图像合成、风格迁移和数据增强方面应用广泛。</p>
+                </div>
+                 <div class="card md:col-span-1 lg:col-span-3">
+                     <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="sub-heading text-yellow-orange">优势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>生成样本清晰、高保真度</li>
+                                <li>采样速度快 (训练后)</li>
+                                <li>强大的无监督学习能力</li>
+                                <li>应用领域广泛</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="sub-heading text-green-vibrant">劣势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>训练不稳定，易梯度消失/不收敛</li>
+                                <li>模式崩溃 (生成样本缺乏多样性)</li>
+                                <li>评估困难，对超参数敏感</li>
+                                <li>计算资源需求大</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card lg:col-span-3">
+                    <h3 class="sub-heading text-coral">生成对抗网络 (GANs) SWOT 分析</h3>
+                    <div class="swot-grid">
+                        <div class="swot-item bg-green-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">优势 (Strengths)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>生成清晰、高保真度样本 (尤其图像)</li>
+                                <li>采样速度快 (训练完成后)</li>
+                                <li>强大的无监督学习能力</li>
+                                <li>应用领域广泛，变体众多</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-coral text-white">
+                            <h4 class="font-bold text-xl mb-2">劣势 (Weaknesses)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>训练不稳定，难以收敛 (梯度消失、振荡)</li>
+                                <li>模式崩溃 (生成样本多样性不足)</li>
+                                <li>评估困难，缺乏统一标准指标</li>
+                                <li>对超参数和网络架构敏感</li>
+                                <li>计算资源需求大 (训练大型模型)</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-blue-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">机遇 (Opportunities)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>研究新损失函数和正则化技术提升稳定性</li>
+                                <li>增强可控性与潜空间解耦 (如InfoGAN, cGAN)</li>
+                                <li>深化对GAN动态学和收敛性的理论理解</li>
+                                <li>探索Transformer等新架构 (TransGAN)</li>
+                                <li>拓展至多模态生成</li>
+                                <li>在网络安全、药物发现等新领域应用</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-yellow-orange text-dark-teal">
+                            <h4 class="font-bold text-xl mb-2">威胁 (Threats)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>深度伪造 (Deepfakes) 的滥用与检测挑战</li>
+                                <li>生成内容的版权与知识产权问题</li>
+                                <li>模型偏见放大与公平性问题</li>
+                                <li>需要健全的伦理准则和法规监管</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card md:col-span-1 lg:col-span-2">
+                    <h3 class="sub-heading text-blue-vibrant">主要应用</h3>
+                    <ul class="icon-list">
+                        <li><span>🎨</span>图像合成 (人脸、场景 - StyleGAN)</li>
+                        <li><span>🔄</span>图像到图像转换 (风格迁移 - CycleGAN)</li>
+                        <li><span>➕</span>数据增强 (医学影像、自动驾驶)</li>
+                        <li><span>📝</span>文本到图像合成</li>
+                        <li><span>🎞️</span>视频生成与预测</li>
+                        <li><span>⚠️</span>异常检测</li>
+                    </ul>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-1">
+                    <h3 class="sub-heading text-coral">未来趋势</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>提升训练稳定性</li>
+                        <li>增强可控性与解耦表示</li>
+                        <li>深化理论理解</li>
+                        <li>Transformer GANs等新架构</li>
+                        <li>伦理考量 (Deepfake检测)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="vaes" class="mb-16">
+            <h2 class="section-title text-yellow-orange">4. 变分自编码器 (VAEs)</h2>
+            <div class="card mb-8">
+                <p class="text-center text-lg mb-4">VAEs通过概率编码器和解码器学习数据的潜表示，训练稳定且潜空间有意义。</p>
+                <div class="highlight-stat text-yellow-orange">关键角色: 为LDM等复杂模型提供高效潜空间</div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-green-vibrant">核心原理：概率编解码</h3>
+                     <div class="flow-diagram">
+                        <div class="flow-step bg-yellow-orange text-dark-teal">输入数据 (x)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step">编码器 q(z|x)</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step bg-dark-teal text-white">潜分布 (均值 μ, 方差 σ²)</div>
+                        <div class="flow-arrow">↘️ (采样 z)</div>
+                        <div class="flow-step bg-coral text-white" style="margin-top:-2.5rem;">解码器 p(x|z)</div>
+                        <div class="flow-arrow">↙️ (KL散度 vs 先验 p(z))</div>
+                        <div class="flow-step bg-blue-vibrant text-white">重建数据 (x̂)</div>
+                         <div class="flow-arrow mt-2">⬇️</div>
+                         <div class="flow-step">优化ELBO (重建损失 + KL散度)</div>
+                    </div>
+                    <p class="mt-4">编码器输出潜变量分布参数，解码器从采样潜变量重建。优化证据下界(ELBO)。</p>
+                </div>
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-blue-vibrant">历史里程碑</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>2013:</strong> Kingma & Welling, Rezende等独立提出VAEs。</li>
+                        <li><strong>2017:</strong> β-VAE (解耦表示), VQ-VAE (离散潜空间)。</li>
+                        <li><strong>2020:</strong> NVAE 提升图像生成质量。</li>
+                        <li><strong>近年:</strong> 作为LDMs关键组件，提供潜空间压缩。</li>
+                    </ul>
+                </div>
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-coral">应用领域主导性 (示例)</h3>
+                     <div class="chart-container h-64 md:h-80">
+                        <canvas id="vaeAppsChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-2 text-center">VAEs在表示学习、异常检测及作为其他模型组件方面很关键。</p>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-3">
+                     <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="sub-heading text-green-vibrant">优势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>训练过程稳定</li>
+                                <li>学习到平滑、有意义的潜空间</li>
+                                <li>坚实的概率框架，可量化不确定性</li>
+                                <li>适用于异常检测、表示学习</li>
+                                <li>作为其他模型（如LDM）的关键组件</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="sub-heading text-blue-vibrant">劣势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>生成样本常较模糊 (经典VAEs)</li>
+                                <li>可能发生后验坍塌</li>
+                                <li>ELBO是真实似然的下界</li>
+                                <li>难以捕捉复杂高度结构化数据</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card lg:col-span-3">
+                    <h3 class="sub-heading text-yellow-orange">变分自编码器 (VAEs) SWOT 分析</h3>
+                    <div class="swot-grid">
+                        <div class="swot-item bg-green-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">优势 (Strengths)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>训练稳定，优化目标明确 (ELBO)</li>
+                                <li>学习平滑、有意义、可解释的潜空间</li>
+                                <li>坚实的概率框架，可量化不确定性</li>
+                                <li>擅长表示学习、异常检测、数据插补</li>
+                                <li>作为其他复杂模型 (如LDM) 的关键组件</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-coral text-white">
+                            <h4 class="font-bold text-xl mb-2">劣势 (Weaknesses)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>生成样本常较模糊，缺乏细节 (经典VAEs)</li>
+                                <li>可能发生后验坍塌 (潜变量无信息)</li>
+                                <li>ELBO与真实似然存在差距</li>
+                                <li>难以捕捉非常复杂或高度结构化的数据分布</li>
+                                <li>KL散度计算对非高斯分布复杂</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-blue-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">机遇 (Opportunities)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>改进架构 (NVAE) 和损失函数提升样本质量</li>
+                                <li>增强潜空间解耦性与可解释性 (β-VAE)</li>
+                                <li>混合模型 (VAE-GANs) 取长补短</li>
+                                <li>提升可扩展性与效率 (LeanVAE)</li>
+                                <li>增强鲁棒性 (SRL-VAE)</li>
+                                <li>拓展至科学发现、个性化医疗等新领域</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-yellow-orange text-dark-teal">
+                            <h4 class="font-bold text-xl mb-2">威胁 (Threats)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>计算成本 (尤其对于大型、分层VAEs)</li>
+                                <li>对大规模高质量数据的依赖</li>
+                                <li>在纯生成任务上可能被更高质量模型超越</li>
+                                <li>模型选择和超参数调整的复杂性</li>
+                                <li>创新AI对原创性的挑战</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card md:col-span-1 lg:col-span-2">
+                    <h3 class="sub-heading text-coral">主要应用</h3>
+                    <ul class="icon-list">
+                        <li><span>🧩</span>表示学习与特征提取</li>
+                        <li><span>🚨</span>异常检测 (金融欺诈、网络安全)</li>
+                        <li><span>🧬</span>药物发现 (分子生成)</li>
+                        <li><span>🖼️</span>图像生成与编辑 (常作为组件)</li>
+                        <li><span>🤖</span>机器人学 (规划)</li>
+                        <li><span>🌦️</span>气象数据同化 (VAE-Var)</li>
+                    </ul>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-1">
+                    <h3 class="sub-heading text-yellow-orange">未来趋势</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>提升样本质量 (减少模糊)</li>
+                        <li>更丰富、可解释的潜空间</li>
+                        <li>解决后验坍塌</li>
+                        <li>作为大型系统关键组件的角色</li>
+                        <li>新应用探索 (科学发现)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="autoregressive" class="mb-16">
+            <h2 class="section-title text-green-vibrant">5. 自回归模型 (Autoregressive Models)</h2>
+            <div class="card mb-8">
+                <p class="text-center text-lg mb-4">自回归模型通过逐步预测序列中的下一个元素来生成内容，是大型语言模型的核心。</p>
+                <div class="highlight-stat text-green-vibrant">关键成就: 驱动大型语言模型 (LLMs) 革命</div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-blue-vibrant">核心原理：序列化生成</h3>
+                    <div class="flow-diagram">
+                        <div class="flow-step bg-green-vibrant text-white">起始符/上下文</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step">预测 P(x₁ | context)</div>
+                        <div class="flow-arrow">⬇️ (采样 x₁)</div>
+                        <div class="flow-step bg-dark-teal text-white">预测 P(x₂ | context, x₁)</div>
+                        <div class="flow-arrow">⬇️ (采样 x₂)</div>
+                        <div class="flow-step">...</div>
+                        <div class="flow-arrow">⬇️</div>
+                        <div class="flow-step bg-coral text-white">预测 P(xₙ | context, x₁..n-1)</div>
+                         <div class="flow-arrow">⬇️ (采样 xₙ)</div>
+                         <div class="flow-step bg-yellow-orange text-dark-teal">完整序列</div>
+                    </div>
+                    <p class="mt-4">基于概率链式法则 <span class="math-inline">p(x) = Π p(xᵢ | x<sub>&lt;i</sub>)</span>，逐个生成元素，每个元素以先前生成的为条件。</p>
+                </div>
+                <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-coral">历史里程碑</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>统计学起源:</strong> AR, ARIMA 模型。</li>
+                        <li><strong>早期深度学习:</strong> RNNs, LSTMs 用于文本/语音。</li>
+                        <li><strong>2016:</strong> PixelRNN/CNN (图像), WaveNet (音频)。</li>
+                        <li><strong>2017:</strong> Transformer (Vaswani等) 带来革命。</li>
+                        <li><strong>至今:</strong> GPT系列等大型语言模型 (LLMs) 飞速发展。</li>
+                    </ul>
+                </div>
+                 <div class="card lg:col-span-1">
+                    <h3 class="sub-heading text-yellow-orange">应用领域主导性 (示例)</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="arAppsChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-2 text-center">自回归模型在自然语言处理领域占据绝对主导地位。</p>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-3">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="sub-heading text-blue-vibrant">优势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>精确的似然评估</li>
+                                <li>在序列数据 (文本、音频) 上表现优异，连贯性好</li>
+                                <li>简单且可解释的概率结构</li>
+                                <li>大型语言模型 (LLMs) 的基石</li>
+                                <li>训练目标明确稳定</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="sub-heading text-coral">劣势</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>采样速度慢 (严格串行)</li>
+                                <li>暴露偏差 (训练与推断不一致)</li>
+                                <li>长程依赖建模仍有挑战 (部分架构)</li>
+                                <li>固定生成顺序可能不自然</li>
+                                <li>训练大规模模型计算成本极高</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card lg:col-span-3">
+                    <h3 class="sub-heading text-green-vibrant">自回归模型 SWOT 分析</h3>
+                    <div class="swot-grid">
+                        <div class="swot-item bg-green-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">优势 (Strengths)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>精确似然评估 (基于链式法则)</li>
+                                <li>序列数据生成连贯性极佳 (文本、音频)</li>
+                                <li>概率结构清晰，训练目标明确 (MLE)</li>
+                                <li>大型语言模型 (LLMs) 的核心架构</li>
+                                <li>灵活性高，可应用于多种数据域</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-coral text-white">
+                            <h4 class="font-bold text-xl mb-2">劣势 (Weaknesses)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>采样速度慢 (逐元素串行生成)</li>
+                                <li>暴露偏差 (训练时教师强制 vs 推断时自生成)</li>
+                                <li>长程依赖建模对某些架构仍是挑战</li>
+                                <li>固定生成顺序对某些数据类型不自然</li>
+                                <li>训练超大规模模型计算成本极高</li>
+                                <li>高似然不总等于高质量感知样本</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-blue-vibrant text-white">
+                            <h4 class="font-bold text-xl mb-2">机遇 (Opportunities)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>开发更快的采样技术 (推测采样、并行解码)</li>
+                                <li>改进架构以更好地捕捉长程依赖</li>
+                                <li>构建统一的多模态自回归模型</li>
+                                <li>深入理解规模法则，提升训练和推断效率</li>
+                                <li>增强生成内容的可控性与可编辑性</li>
+                                <li>与VAEs、扩散模型等范式集成</li>
+                                <li>拓展至3D内容生成、机器人等新领域</li>
+                            </ul>
+                        </div>
+                        <div class="swot-item bg-yellow-orange text-dark-teal">
+                            <h4 class="font-bold text-xl mb-2">威胁 (Threats)</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>错误累积可能导致生成质量下降</li>
+                                <li>大型模型生成不道德或有害内容的风险</li>
+                                <li>训练数据的偏见可能被放大</li>
+                                <li>数据污染、版权和隐私问题 (尤其LLMs)</li>
+                                <li>对齐与安全风险，确保模型行为符合预期</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card md:col-span-1 lg:col-span-2">
+                    <h3 class="sub-heading text-yellow-orange">主要应用</h3>
+                    <ul class="icon-list">
+                        <li><span>💬</span>自然语言处理 (LLMs - ChatGPT, GPT-4)</li>
+                        <li><span>⌨️</span>机器翻译、文本摘要、代码生成</li>
+                        <li><span>🖼️</span>图像生成 (PixelCNN, ImageGPT, VQ-VAE+AR)</li>
+                        <li><span>🔊</span>语音与音频合成 (WaveNet, TTS)</li>
+                        <li><span>📈</span>时间序列预测 (天气、金融)</li>
+                        <li><span>🧬</span>分子生成 (SMILES串)</li>
+                    </ul>
+                </div>
+                <div class="card md:col-span-1 lg:col-span-1">
+                    <h3 class="sub-heading text-green-vibrant">未来趋势</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>更快的采样/并行生成</li>
+                        <li>改进长程依赖建模</li>
+                        <li>多模态自回归模型</li>
+                        <li>理解规模法则与提升效率</li>
+                        <li>增强可控性与可编辑性</li>
+                        <li>与其他范式集成</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="mb-16">
+            <h2 class="section-title text-blue-vibrant">6. 四大范式横向对比与总结</h2>
+            <div class="card mb-8">
+                <h3 class="sub-heading text-coral">核心特性对比</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-dark-teal text-white">
+                                <th class="p-3 border border-slate-300">特性</th>
+                                <th class="p-3 border border-slate-300">扩散模型</th>
+                                <th class="p-3 border border-slate-300">GANs</th>
+                                <th class="p-3 border border-slate-300">VAEs</th>
+                                <th class="p-3 border border-slate-300">自回归模型</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">样本质量 (图像)</td>
+                                <td class="p-3 border border-slate-300">非常高 (细节好)</td>
+                                <td class="p-3 border border-slate-300">高 (清晰锐利)</td>
+                                <td class="p-3 border border-slate-300">中 (常模糊)</td>
+                                <td class="p-3 border border-slate-300">中 (逐像素可高)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">训练稳定性</td>
+                                <td class="p-3 border border-slate-300">高</td>
+                                <td class="p-3 border border-slate-300">低 (需技巧)</td>
+                                <td class="p-3 border border-slate-300">高</td>
+                                <td class="p-3 border border-slate-300">高</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">采样速度</td>
+                                <td class="p-3 border border-slate-300">慢 (迭代)</td>
+                                <td class="p-3 border border-slate-300">快 (单次)</td>
+                                <td class="p-3 border border-slate-300">快 (单次)</td>
+                                <td class="p-3 border border-slate-300">慢 (串行)</td>
+                            </tr>
+                             <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">计算成本 (采样)</td>
+                                <td class="p-3 border border-slate-300">高</td>
+                                <td class="p-3 border border-slate-300">低</td>
+                                <td class="p-3 border border-slate-300">低</td>
+                                <td class="p-3 border border-slate-300">高 (长序列)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">可控性</td>
+                                <td class="p-3 border border-slate-300">好 (条件化)</td>
+                                <td class="p-3 border border-slate-300">中 (cGAN, StyleGAN)</td>
+                                <td class="p-3 border border-slate-300">好 (潜空间操作)</td>
+                                <td class="p-3 border border-slate-300">中 (prompting)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-300 font-semibold">主要优势领域</td>
+                                <td class="p-3 border border-slate-300">高质量图像/多模态</td>
+                                <td class="p-3 border border-slate-300">清晰图像, 快速生成</td>
+                                <td class="p-3 border border-slate-300">表示学习, 异常检测</td>
+                                <td class="p-3 border border-slate-300">文本/序列连贯性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="sub-heading text-green-vibrant">范式间的协同：走向混合模型</h3>
+                <p class="mb-4">当前趋势是不同范式组件的模块化和混合使用，以取长补短：</p>
+                <div class="flow-diagram">
+                    <div class="flow-step bg-yellow-orange text-dark-teal">VAE (编码器)</div>
+                    <div class="flow-arrow">↘️ (潜空间)</div>
+                    <div class="flow-step bg-blue-vibrant text-white">扩散模型 (在潜空间操作)</div>
+                    <div class="flow-arrow">↙️ (生成潜表示)</div>
+                    <div class="flow-step bg-yellow-orange text-dark-teal">VAE (解码器) ➡️ 高质量输出 (LDM)</div>
+                </div>
+                <p class="mt-4 text-center text-sm">例如：潜空间扩散模型 (LDM)</p>
+                
+                <div class="flow-diagram mt-8"> <div class="flow-step bg-yellow-orange text-dark-teal">VQ-VAE (离散视觉词元)</div>
+                    <div class="flow-arrow">⬇️</div>
+                    <div class="flow-step bg-green-vibrant text-white">自回归模型 (Transformer 对词元建模) ➡️ 生成新图像</div>
+                </div>
+                <p class="mt-4 text-center text-sm">例如：VQ-VAE + Transformer</p> <p class="mt-6 text-center">这种融合预示着未来AI系统将更加灵活和强大。</p> </div>
+        </section>
+
+        <section id="conclusion" class="mb-8">
+            <h2 class="section-title text-coral">7. 结论与未来展望</h2>
+            <div class="card">
+                <p class="mb-4">扩散模型、GANs、VAEs和自回归模型共同构成了当前生成式AI的基石。它们各自的演进及彼此间的融合，正推动AI在理解、模拟乃至创造新内容方面达到新高度。未来发展将聚焦于效率、可控性、理论理解、多模态能力以及至关重要的伦理安全问题。</p>
+                <h3 class="sub-heading text-yellow-orange">未来关键方向</h3>
+                <ul class="icon-list">
+                    <li><span>⚡</span><strong>效率与可扩展性:</strong> 更快、更大、更普惠。</li>
+                    <li><span>🎛️</span><strong>可控性与可编辑性:</strong> 更精细、更直观的创作。</li>
+                    <li><span>💡</span><strong>理论理解与可解释性:</strong> 更透明、更可信的模型。</li>
+                    <li><span>🔄</span><strong>多模态与跨领域:</strong> 更统一、更通用的智能。</li>
+                    <li><span>🛡️</span><strong>伦理、安全与负责任AI:</strong> 技术向善，防范风险。</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 py-4 border-t border-slate-300">
+            <p class="text-sm text-dark-teal">&copy; 2025 生成式AI范式解析信息图。基于提供的研究报告生成。</p>
+        </footer>
+    </div>
+
+    <script>
+        // 定义图表颜色常量
+        const CHART_COLORS = {
+            coral: '#FF6B6B',
+            yellowOrange: '#FFD166',
+            greenVibrant: '#06D6A0',
+            blueVibrant: '#118AB2',
+            darkTeal: '#073B4C'
+        };
+
+        // 处理过长标签的函数，将其分割成多行
+        function processLabels(labels) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > 16) { // 调整长度以更好地适应
+                    const words = label.split(' ');
+                    const newLabel = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                            newLabel.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    newLabel.push(currentLine.trim());
+                    return newLabel;
+                }
+                return label;
+            });
+        }
+
+        // 工具提示标题的回调函数
+        const tooltipTitleCallback = (tooltipItems) => {
+            // Chart.js v3+ tooltipItems is an array, take the first item
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) { // 如果标签被分割成数组
+                return label.join(' '); // 将数组连接回单个字符串用于工具提示
+            }
+            return label;
+        };
+        
+        // 通用图表选项
+        const commonChartOptions = (titleText) => ({
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: titleText,
+                    color: CHART_COLORS.darkTeal,
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom:10
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: CHART_COLORS.darkTeal,
+                        font: {
+                            size: 10 // 图例使用较小字体
+                        },
+                        boxWidth: 15, // 调整图例颜色框宽度
+                        padding: 10
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback // 使用自定义标题回调
+                    }
+                }
+            },
+            scales: { // 仅对需要坐标轴的图表（如条形图）生效
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: CHART_COLORS.darkTeal,
+                         font: {
+                            size: 10
+                        }
+                    },
+                    grid: {
+                        color: '#e0e0e0' // 较浅的网格线颜色
+                    }
+                },
+                x: {
+                     ticks: {
+                        color: CHART_COLORS.darkTeal,
+                         font: {
+                            size: 10
+                        },
+                        maxRotation: 45, // 旋转X轴标签以防重叠
+                        minRotation: 0
+                    },
+                    grid: {
+                        display: false // 通常不显示X轴网格线
+                    }
+                }
+            }
+        });
+
+        // 扩散模型应用图表 (甜甜圈图)
+        const diffusionAppsCtx = document.getElementById('diffusionAppsChart').getContext('2d');
+        new Chart(diffusionAppsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: processLabels(['高质量图像合成', '文本到图像', '视频/音频生成', '科学发现 (药物/材料)']),
+                datasets: [{
+                    label: '扩散模型应用分布',
+                    data: [40, 30, 20, 10], // 示例数据
+                    backgroundColor: [
+                        CHART_COLORS.blueVibrant,
+                        CHART_COLORS.greenVibrant,
+                        CHART_COLORS.yellowOrange,
+                        CHART_COLORS.coral
+                    ],
+                    borderColor: '#FFFFFF', // 白色边框以分隔各部分
+                    borderWidth: 2
+                }]
+            },
+            options: commonChartOptions('扩散模型应用领域')
+        });
+
+        // GANs 应用图表 (条形图)
+        const ganAppsCtx = document.getElementById('ganAppsChart').getContext('2d');
+        new Chart(ganAppsCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['图像合成 (StyleGAN)', '图像到图像转换 (CycleGAN)', '数据增强', '文本到图像', '视频生成']),
+                datasets: [{
+                    label: 'GANs 主要应用领域',
+                    data: [35, 25, 20, 15, 5], // 示例数据
+                    backgroundColor: CHART_COLORS.coral,
+                    borderColor: CHART_COLORS.darkTeal,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...commonChartOptions('GANs应用领域'),
+                indexAxis: 'y', // 使条形图水平显示，标签更易读
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: CHART_COLORS.darkTeal,
+                            font: { size: 9 } // Y轴标签字体可以小一些
+                        },
+                         grid: { color: '#e0e0e0' }
+                    },
+                    x: {
+                         ticks: { color: CHART_COLORS.darkTeal, font: {size: 10} },
+                         grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // VAEs 应用图表 (饼图)
+        const vaeAppsCtx = document.getElementById('vaeAppsChart').getContext('2d');
+        new Chart(vaeAppsCtx, {
+            type: 'pie',
+            data: {
+                labels: processLabels(['表示学习', '异常检测', '药物发现', '图像生成 (组件)', '机器人学']),
+                datasets: [{
+                    label: 'VAEs 主要应用领域',
+                    data: [30, 25, 20, 15, 10], // 示例数据
+                    backgroundColor: [
+                        CHART_COLORS.yellowOrange,
+                        CHART_COLORS.greenVibrant,
+                        CHART_COLORS.blueVibrant,
+                        CHART_COLORS.coral,
+                        CHART_COLORS.darkTeal
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: commonChartOptions('VAEs应用领域')
+        });
+
+        // 自回归模型应用图表 (雷达图)
+        const arAppsCtx = document.getElementById('arAppsChart').getContext('2d');
+        new Chart(arAppsCtx, {
+            type: 'polarArea', // 使用极坐标区域图展示不同维度的强度
+            data: {
+                labels: processLabels(['自然语言处理 (LLMs)', '机器翻译/摘要', '图像生成 (PixelCNN)', '语音合成 (WaveNet)', '时间序列预测']),
+                datasets: [{
+                    label: '自回归模型应用强度',
+                    data: [50, 30, 20, 25, 15], // 示例数据
+                    backgroundColor: [
+                        'rgba(6, 214, 160, 0.7)', // greenVibrant with alpha
+                        'rgba(17, 138, 178, 0.7)', // blueVibrant with alpha
+                        'rgba(255, 107, 107, 0.7)', // coral with alpha
+                        'rgba(255, 209, 102, 0.7)', // yellowOrange with alpha
+                        'rgba(7, 59, 76, 0.7)'     // darkTeal with alpha
+                    ],
+                    borderColor: [ // 为每个扇区设置不同边框色，或统一颜色
+                        CHART_COLORS.greenVibrant,
+                        CHART_COLORS.blueVibrant,
+                        CHART_COLORS.coral,
+                        CHART_COLORS.yellowOrange,
+                        CHART_COLORS.darkTeal
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...commonChartOptions('自回归模型应用领域'),
+                scales: { // 雷达图/极坐标区域图的刻度配置
+                    r: {
+                        angleLines: { display: true, color: '#cccccc' },
+                        grid: { color: '#dddddd' },
+                        pointLabels: {
+                            font: { size: 10, weight: 'bold' },
+                            color: CHART_COLORS.darkTeal
+                        },
+                        ticks: {
+                            display: true, // 显示刻度值
+                            backdropColor: 'rgba(255, 255, 255, 0.75)', // 给刻度标签加背景以提高可读性
+                            color: CHART_COLORS.darkTeal,
+                            font: { size: 8 },
+                            stepSize: 10 // 根据数据范围调整步长
+                        }
+                    }
+                },
+                 plugins: { // 雷达图的图例和标题可能需要微调
+                    legend: {
+                        position: 'bottom', // 雷达图图例放底部可能更好
+                         labels: { font: { size: 9 }, boxWidth: 12, padding: 15 }
+                    },
+                    title: {
+                        display: true,
+                        text: '自回归模型应用领域',
+                        color: CHART_COLORS.darkTeal,
+                        font: { size: 14, weight: 'bold'},
+                        padding: { top: 10, bottom: 5 } // 减少底部填充，因为图例在下面
+                    },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
