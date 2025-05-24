@@ -63,33 +63,17 @@
             border-radius: 0.375rem; /* rounded-md */
             margin-top: 1.5rem; /* mt-6 */
         }
+         .analysis-box {
+            background-color: #E0F2F7; /* Lightest accent from palette */
+            border: 1px solid #A0D2DB; 
+            border-left: 4px solid #00AEEF; /* Secondary color */
+            padding: 1rem; /* p-4 */
+            border-radius: 0.375rem; /* rounded-md */
+            margin-top: 1.5rem; /* mt-6 */
+        }
         /* Chosen Palette: "Brilliant Blues" - Primary: #0072BB, Secondary: #00AEEF, Accents: #89CFF0, #A0D2DB, #E0F2F7. Text: #1A202C (Tailwind gray-900) */
     </style>
-    <!-- 
-        Infographic Plan Summary:
-        Section 1: Introduction - The Rise of Stablecoins (Definition, Global Market Snapshot, Types of Stablecoins)
-        Section 2: USD Stablecoins - Maintaining Global Dominance (Market Leaders, Regulatory Landscape, Reserves, Strategic Goal)
-        Section 3: HKD Stablecoins - Building Asia's Web3 Hub (Regulatory Framework, Reserves, Strategic Goals)
-        Section 4: Key Differences at a Glance (Comparison Table: US vs. HK)
-        Section 5: Risks & Future Outlook (Common Risks, Interest Debate, Future Trends)
-        Section 6: Conclusion
-    -->
-    <!-- 
-        Visualization Choices Summary:
-        1. Global Market Size (Current): Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        2. Global Market Growth (Projected): Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        3. Types of Stablecoins by Market Share: Compare/Inform -> Donut Chart -> Chart.js Canvas. NO SVG.
-        4. USD Stablecoin Market Leaders: Compare -> Bar Chart -> Chart.js Canvas. NO SVG.
-        5. US Regulatory Path: Organize/Inform -> Flow Chart (HTML/CSS) -> HTML/Tailwind. NO SVG, NO MERMAID.
-        6. HK Regulatory Path: Organize/Inform -> Flow Chart (HTML/CSS) -> HTML/Tailwind. NO SVG, NO MERMAID.
-        7. Typical USD Stablecoin Reserves: Inform/Compare -> Stacked Bar Chart -> Chart.js Canvas. NO SVG.
-        8. HK Capital Requirement: Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        9. US vs. HK Comparison: Compare/Organize -> HTML Table -> HTML/Tailwind. NO SVG.
-        10. Illicit Finance Stat: Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        NEITHER Mermaid JS NOR SVG were used anywhere in the output.
-        Chosen Color Palette: "Brilliant Blues" (Primary: #0072BB, Secondary: #00AEEF, Accents: #89CFF0, #A0D2DB, #E0F2F7)
-    -->
-</head>
+    </head>
 <body class="text-gray-900">
 
     <header class="bg-[#0072BB] text-white p-6 shadow-lg sticky top-0 z-50">
@@ -162,6 +146,17 @@
                             <div class="flowchart-step">目标：统一框架，但细节待协调 (如联邦与州监管权、算法稳定币处理)</div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="analysis-box">
+                    <h3 class="text-xl font-semibold mb-2 text-[#0072BB]">监管焦点：大型企业发行稳定币</h3>
+                    <p class="text-md mb-3">美国对大型企业（尤其市值超百亿美元的发行方）发行稳定币并非完全禁止，而是强调通过联邦层面（如美联储、OCC）进行**严格监管**。其主要目的包括：</p>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li><span class="font-semibold">防范系统性风险：</span>控制大型发行方可能带来的巨大市场冲击。</li>
+                        <li><span class="font-semibold">维护金融稳定与消费者保护：</span>确保储备充足、透明运作、用户资产安全。</li>
+                        <li><span class="font-semibold">巩固美元主导地位：</span>将数字美元生态纳入国家金融战略，扩展美元影响力。</li>
+                        <li><span class="font-semibold">避免监管套利：</span>建立统一的联邦标准，防止大型实体寻求宽松监管。</li>
+                    </ul>
                 </div>
 
                 <h3 class="text-2xl font-semibold mt-8 mb-3 text-[#0072BB]">典型美元稳定币储备构成</h3>
