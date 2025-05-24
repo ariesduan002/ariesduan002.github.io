@@ -1,447 +1,60 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>稳定币市场研究信息图表：美元 vs 港元</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px; /* Default max-width */
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px; /* Base height */
-            max-height: 400px; /* Max height */
-        }
-        @media (min-width: 768px) { /* md breakpoint */
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .stat-card {
-            background-color: #ffffff;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            padding: 1.5rem; /* p-6 */
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
-        .flowchart-step {
-            border: 2px solid #00AEEF; /* Secondary color from palette */
-            padding: 1rem;
-            border-radius: 0.5rem;
-            background-color: #E0F2F7; /* Lightest accent from palette */
-            text-align: center;
-            margin-bottom: 0.5rem;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .flowchart-arrow {
-            font-size: 2rem;
-            color: #0072BB; /* Primary color */
-            text-align: center;
-            margin: 0.25rem 0;
-        }
-        .table-header {
-            background-color: #0072BB; /* Primary color */
-            color: white;
-        }
-        /* Chosen Palette: "Brilliant Blues" - Primary: #0072BB, Secondary: #00AEEF, Accents: #89CFF0, #A0D2DB, #E0F2F7. Text: #1A202C (Tailwind gray-900) */
-    </style>
-    <!-- 
-        Infographic Plan Summary:
-        Section 1: Introduction - The Rise of Stablecoins (Definition, Global Market Snapshot, Types of Stablecoins)
-        Section 2: USD Stablecoins - Maintaining Global Dominance (Market Leaders, Regulatory Landscape, Reserves, Strategic Goal)
-        Section 3: HKD Stablecoins - Building Asia's Web3 Hub (Regulatory Framework, Reserves, Strategic Goals)
-        Section 4: Key Differences at a Glance (Comparison Table: US vs. HK)
-        Section 5: Risks & Future Outlook (Common Risks, Future Trends)
-        Section 6: Conclusion
-    -->
-    <!-- 
-        Visualization Choices Summary:
-        1. Global Market Size (Current): Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        2. Global Market Growth (Projected): Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        3. Types of Stablecoins by Market Share: Compare/Inform -> Donut Chart -> Chart.js Canvas. NO SVG.
-        4. USD Stablecoin Market Leaders: Compare -> Bar Chart -> Chart.js Canvas. NO SVG.
-        5. US Regulatory Path: Organize/Inform -> Flow Chart (HTML/CSS) -> HTML/Tailwind. NO SVG, NO MERMAID.
-        6. HK Regulatory Path: Organize/Inform -> Flow Chart (HTML/CSS) -> HTML/Tailwind. NO SVG, NO MERMAID.
-        7. Typical USD Stablecoin Reserves: Inform/Compare -> Stacked Bar Chart -> Chart.js Canvas. NO SVG.
-        8. HK Capital Requirement: Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        9. US vs. HK Comparison: Compare/Organize -> HTML Table -> HTML/Tailwind. NO SVG.
-        10. Illicit Finance Stat: Inform -> Single Big Number -> HTML/Tailwind. NO SVG.
-        NEITHER Mermaid JS NOR SVG were used anywhere in the output.
-        Chosen Color Palette: "Brilliant Blues" (Primary: #0072BB, Secondary: #00AEEF, Accents: #89CFF0, #A0D2DB, #E0F2F7)
-    -->
-</head>
-<body class="text-gray-900">
+就在 Canvas 中更新 `stablecoin_infographic_zh` 文档。
+我将在“主要风险点”下方新增一个子部分，专门讨论“是否支付利息的争议与系统性风险”。由于空间限制，我将以精炼的方式呈现这些复杂的概念，突出关键点。
 
-    <header class="bg-[#0072BB] text-white p-6 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto">
-            <h1 class="text-3xl font-bold text-center">稳定币市场研究：美元 vs 港元</h1>
-        </div>
-    </header>
+请注意，图表的视觉布局可能需要一些调整以适应新增的文本内容。
 
-    <main class="container mx-auto p-4 md:p-8">
+**更新后的“风险与未来展望”部分将如下所示：**
 
-        <section id="intro" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">稳定币：连接传统金融与数字未来的桥梁</h2>
-            <div class="stat-card">
-                <p class="text-lg mb-4">稳定币是一种旨在通过将其价值与参考资产（如美元或其他法定货币、黄金等商品或一篮子资产）挂钩来最小化价格波动的加密资产类别。其目标通常是实现一对一的挂钩，例如1稳定币等于1美元。与比特币等波动性较大的传统加密货币不同，稳定币提供了更高的价格稳定性，使其更适合日常交易、储蓄和金融合约等实际应用。</p>
-                <p class="text-lg mb-4">稳定币是传统金融与新兴加密货币生态系统之间的重要桥梁，利用区块链技术的效率和透明度，同时降低了非挂钩数字资产固有的价格风险。这包括促进更快、更便宜的交易，并通过智能合约实现可编程性。</p>
-                <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">稳定币的类型</h3>
-                <p class="text-md mb-4">稳定币的类型多种多样，主要包括：</p>
-                <ul class="list-disc list-inside text-md mb-4 space-y-1">
-                    <li><span class="font-semibold">法定货币支持的稳定币：</span> 这是最普遍的类型，由存放在传统银行账户中的法定货币（如美元、欧元）储备支持。例如，USDC (USD Coin)、USDT (Tether) 都与美元按1:1挂钩。这一类别占据了稳定币总市值的99%以上。</li>
-                    <li><span class="font-semibold">加密货币支持的稳定币：</span> 这类稳定币以其他加密货币为抵押，通常会超额抵押以应对基础加密资产的价格波动。MakerDAO 发行的 DAI 就是一个例子。</li>
-                    <li><span class="font-semibold">算法稳定币：</span> 这类稳定币不依赖直接的资产支持，而是利用算法和智能合约自动调整供需以维持其挂钩。一个值得注意但已失败的例子是 TerraUSD (UST)。</li>
+<section id="risks-outlook" class="mb-12">
+    <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">风险与未来展望</h2>
+    <div class="stat-card">
+        <p class="text-lg mb-4">尽管稳定币发展迅速，但仍面临挤兑风险、系统性风险和非法金融活动等挑战。监管的明确性和技术的成熟将是未来发展的关键。</p>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">主要风险点</h3>
+                <ul class="list-disc list-inside space-y-2 text-md">
+                    <li><span class="font-semibold">挤兑风险：</span>尤其在缺乏存款保险或最后贷款人支持的情况下。</li>
+                    <li><span class="font-semibold">系统性风险：</span>大规模采用可能影响金融稳定和货币政策传导。</li>
+                    <li><span class="font-semibold">非法金融风险：</span>可能被用于洗钱、恐怖融资或规避制裁。
+                        <div class="stat-card text-center bg-[#E0F2F7] mt-2 p-3">
+                            <p class="text-xl font-bold text-[#F15A24]">超400亿美元</p>
+                            <p class="text-xs text-gray-600">(2022-2023年稳定币促成的非法交易额)</p>
+                        </div>
+                    </li>
+                    <li><span class="font-semibold">监管不确定性：</span>特别是在美国，持续的立法辩论可能阻碍创新。</li>
                 </ul>
-                <p class="text-lg mb-4">全球稳定币市场经历了指数级增长，其市值在2025年初达到约2340亿美元。预计到2028年，该市场将大幅扩张，可能达到2万亿美元甚至2.8万亿美元，这得益于更广泛的采用和监管的明晰。市场高度集中，美元挂钩的稳定币占据了总市值的99%以上。</p>
-                <p class="text-lg mb-6">美元挂钩稳定币的压倒性主导地位不仅仅是一种市场现象，它与美国政府“巩固美元作为世界储备货币的持续主导地位”的战略目标明确相关。美元稳定币的普及被视为将美元更深入地嵌入数字经济，即使其他国家正在寻求替代方案。</p>
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div class="stat-card text-center bg-[#E0F2F7]">
-                        <h3 class="text-xl font-semibold text-[#0072BB] mb-2">全球稳定币当前市值</h3>
-                        <p class="text-4xl font-bold text-[#00AEEF]">约 2340 亿美元</p>
-                        <p class="text-sm text-gray-600">(截至 2025 年初)</p>
-                    </div>
-                    <div class="stat-card text-center bg-[#E0F2F7]">
-                        <h3 class="text-xl font-semibold text-[#0072BB] mb-2">预计市场规模 (2028年)</h3>
-                        <p class="text-4xl font-bold text-[#00AEEF]">2 万亿 - 2.8 万亿美元</p>
-                        <p class="text-sm text-gray-600">(潜力巨大)</p>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">稳定币类型构成</h3>
-                <p class="text-md mb-4">法定货币支持的稳定币占据市场主导地位，构成了稳定币总市值的绝大部分。这反映了市场对与传统法定货币直接挂钩的数字资产的偏好和信任。</p>
-                <div class="chart-container mx-auto">
-                    <canvas id="stablecoinTypesChart"></canvas>
-                </div>
-            </div>
-        </section>
 
-        <section id="usd-stablecoins" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">美元稳定币：维持全球主导地位</h2>
-            <div class="stat-card">
-                <p class="text-lg mb-4">美元稳定币在当前市场中占据绝对主导地位，超过99%的稳定币与美元挂钩。美国正努力通过立法来规范这一快速增长的领域，旨在巩固美元作为世界储备货币的地位，并将其影响力扩展到数字经济中。</p>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">主要美元稳定币发行商市场份额</h3>
-                        <p class="text-md mb-4">市场高度集中，Tether (USDT) 和 Circle (USDC) 是两大主导者，共同占据了绝大部分市场份额。</p>
-                        <div class="chart-container">
-                            <canvas id="usdMarketShareChart"></canvas>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">美国监管框架概览</h3>
-                        <p class="text-md mb-4">美国稳定币监管目前呈现碎片化特征，联邦层面仍在讨论统一立法。主要法案（如STABLE Act和GENIUS Act）在关键问题上（如是否允许支付利息）存在分歧，导致监管前景尚不明朗。</p>
-                        <div class="flowchart">
-                            <div class="flowchart-step bg-[#A0D2DB] text-[#0072BB]">当前：州级货币传输许可证 (被认为不足)</div>
-                            <div class="flowchart-arrow">↓</div>
-                            <div class="flowchart-step">拟议联邦立法 (进行中)</div>
-                            <div class="grid grid-cols-2 gap-2 my-2">
-                                <div class="flowchart-step text-sm p-2">STABLE Act (众议院)<br/>(倾向禁止利息)</div>
-                                <div class="flowchart-step text-sm p-2">GENIUS Act (参议院)<br/>(不禁止利息)</div>
-                            </div>
-                            <div class="flowchart-arrow">↓</div>
-                            <div class="flowchart-step">目标：统一框架，但细节待协调 (如联邦与州监管权、算法稳定币处理)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="text-2xl font-semibold mt-8 mb-3 text-[#0072BB]">典型美元稳定币储备构成</h3>
-                <p class="text-md mb-4">拟议立法要求1:1的储备支持，主要由美元现金、美国国债和逆回购协议等高质量流动性资产构成，以确保稳定性和可赎回性。</p>
-                <div class="chart-container mx-auto">
-                    <canvas id="usdReservesChart"></canvas>
-                </div>
-                <p class="text-center text-sm text-gray-600 mt-2">注：储备构成可能因发行方和市场条件而异。</p>
-            </div>
-        </section>
-
-        <section id="hkd-stablecoins" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">港元稳定币：打造亚洲Web3枢纽</h2>
-            <div class="stat-card">
-                <p class="text-lg mb-4">香港采取了积极主动的监管策略，通过了《稳定币条例草案》，旨在将自身打造为全球Web3中心和亚洲数字金融的战略门户。其监管框架清晰统一，由香港金融管理局（HKMA）主导。</p>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">香港监管框架核心特点</h3>
-                        <p class="text-md mb-4">香港建立了全面的许可制度，强调“相同活动、相同风险、相同监管”原则，并明确禁止向稳定币持有人支付利息。</p>
-                        <div class="flowchart">
-                            <div class="flowchart-step bg-[#A0D2DB] text-[#0072BB]">《稳定币条例草案》通过 (2025年5月)</div>
-                            <div class="flowchart-arrow">↓</div>
-                            <div class="flowchart-step">香港金融管理局 (HKMA) 主导监管</div>
-                            <div class="flowchart-arrow">↓</div>
-                            <div class="flowchart-step">核心要求：<br/>- 强制许可<br/>- 1:1储备 (高质量流动资产)<br/>- 禁止支付利息<br/>- AML/CFT合规<br/>- 散户保护</div>
-                            <div class="flowchart-arrow">↓</div>
-                            <div class="flowchart-step">目标：金融稳定、用户保护、市场诚信、Web3中心</div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">储备金要求与灵活性</h3>
-                        <p class="text-md mb-4">要求1:1储备，资产需高质量高流动性。对于港元稳定币，HKMA允许发行方在准备金中纳入美元计价资产，显示了一定的灵活性，但可能需要超额抵押以对冲汇率风险。</p>
-                         <div class="stat-card text-center bg-[#E0F2F7] mt-6">
-                            <h4 class="text-xl font-semibold text-[#0072BB] mb-2">最低实缴股本要求 (非银行发行方)</h4>
-                            <p class="text-3xl font-bold text-[#00AEEF]">2500万港元</p>
-                            <p class="text-sm text-gray-600">(或流通FRS总值的1%，以较高者为准)</p>
-                        </div>
-                        <h3 class="text-2xl font-semibold mt-6 mb-3 text-[#0072BB]">战略目标</h3>
-                         <ul class="list-disc list-inside text-md space-y-1">
-                            <li>成为全球领先的Web3创新中心。</li>
-                            <li>担当连接中国内地与世界的“超级联系人”。</li>
-                            <li>探索人民币支持稳定币的潜力。</li>
-                            <li>促进数字资产在零售、电商和代币化领域的应用。</li>
+                <h3 class="text-2xl font-semibold mb-3 mt-6 text-[#0072BB]">“是否支付利息”的争议与系统性风险</h3>
+                <p class="text-md mb-2">稳定币是否应支付利息是立法上的焦点，因为它关系到稳定币的定位（支付 vs. 投资）和潜在的金融风险。</p>
+                <ul class="list-disc list-inside space-y-2 text-sm">
+                    <li><span class="font-semibold">争议焦点：</span>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>模糊产品性质，引发监管套利担忧。</li>
+                            <li>可能导致银行存款外流，影响银行体系。</li>
+                            <li>消费者可能误解风险，缺乏保障机制。</li>
+                            <li>对传统银行构成不公平竞争。</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="differences" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">核心差异对比：美元稳定币 vs 港元稳定币</h2>
-            <div class="stat-card overflow-x-auto">
-                <p class="text-lg mb-4">美国和香港在稳定币的监管理念、机制、储备要求及战略重点上存在显著差异，反映了各自不同的政策优先和市场定位。</p>
-                <table class="min-w-full divide-y divide-gray-300">
-                    <thead class="table-header">
-                        <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6">对比维度</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">美元稳定币 (美国)</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">港元稳定币 (香港)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white">
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">监管理念</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">碎片化，持续演变，联邦与州级并存，立法仍在协调中</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">积极主动，统一框架，HKMA主导，基于风险</td>
-                        </tr>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">许可机制</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">拟议双重许可 (联邦/州)，监管机构多元</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">HKMA集中许可，具域外管辖权 (针对港元稳定币)</td>
-                        </tr>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">准备金资产</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">1:1支持 (美元、美债、逆回购等)，未明确非美元储备</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">1:1支持 (高质量流动资产)，允许港元稳定币持有美元储备 (需HKMA批准)</td>
-                        </tr>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">利息支付</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">立法存在分歧 (STABLE Act禁止，GENIUS Act不禁止)</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">明确禁止支付利息</td>
-                        </tr>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">战略市场重点</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">巩固美元全球主导地位，扩展至数字经济</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">打造全球Web3中心，成为通往中国的门户，探索数字人民币相关应用</td>
-                        </tr>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">消费者保护与AML/CFT</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">拟议立法包含相关条款，但碎片化监管带来挑战</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">立法中高度重视，严格要求KYC/AML，储备审计</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="risks-outlook" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">风险与未来展望</h2>
-            <div class="stat-card">
-                <p class="text-lg mb-4">尽管稳定币发展迅速，但仍面临挤兑风险、系统性风险和非法金融活动等挑战。监管的明确性和技术的成熟将是未来发展的关键。</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">主要风险点</h3>
-                        <ul class="list-disc list-inside space-y-2 text-md">
-                            <li><span class="font-semibold">挤兑风险：</span>尤其在缺乏存款保险或最后贷款人支持的情况下。</li>
-                            <li><span class="font-semibold">系统性风险：</span>大规模采用可能影响金融稳定和货币政策传导。</li>
-                            <li><span class="font-semibold">非法金融风险：</span>可能被用于洗钱、恐怖融资或规避制裁。
-                                <div class="stat-card text-center bg-[#E0F2F7] mt-2 p-3">
-                                    <p class="text-xl font-bold text-[#F15A24]">超400亿美元</p>
-                                    <p class="text-xs text-gray-600">(2022-2023年稳定币促成的非法交易额)</p>
-                                </div>
-                            </li>
-                            <li><span class="font-semibold">监管不确定性：</span>特别是在美国，持续的立法辩论可能阻碍创新。</li>
+                    </li>
+                    <li><span class="font-semibold">潜在系统性风险：</span>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>加剧挤兑风险，发行方可能投资高风险资产以支付利息。</li>
+                            <li>银行体系去中介化，银行融资压力增大，可能导致信贷紧缩。</li>
+                            <li>阻碍货币政策传导，扩大“影子银行”体系。</li>
+                            <li>监管套利产生金融稳定漏洞，缺乏存款保险等保障。</li>
+                            <li>单一稳定币失败可能引发连锁反应和跨境传染。</li>
                         </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">未来展望</h3>
-                        <ul class="list-disc list-inside space-y-2 text-md">
-                            <li><span class="font-semibold">更广泛的采用：</span>跨境支付、商家交易、DeFi等领域潜力巨大。</li>
-                            <li><span class="font-semibold">监管清晰化：</span>全球主要经济体正逐步完善监管框架，有望提升市场信心。</li>
-                            <li><span class="font-semibold">技术创新：</span>区块链技术和智能合约的进步将推动稳定币功能和效率的提升。</li>
-                            <li><span class="font-semibold">地缘政治影响：</span>稳定币日益成为国家数字金融战略和国际竞争的一部分。</li>
-                        </ul>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
-        </section>
-
-         <section id="conclusion" class="mb-12">
-            <h2 class="text-3xl font-semibold mb-6 text-[#0072BB] border-b-2 border-[#00AEEF] pb-2">结论</h2>
-            <div class="stat-card">
-                <p class="text-lg mb-4">美元稳定币和港元稳定币生态系统在监管框架、战略目标和市场发展路径上展现出显著差异。美国在努力维护美元主导地位的同时，面临内部监管碎片化和立法不确定性的挑战。相比之下，香港以其积极、统一的监管策略，迅速将自身定位为全球Web3创新中心和连接中国内地的重要门户。</p>
-                <p class="text-lg">这些不同的发展路径不仅反映了各自的监管理念和经济目标，也揭示了稳定币在全球数字金融未来和地缘政治格局中日益重要的作用。随着数字经济的持续演进，这两个司法管辖区的策略将对全球稳定币的采用、创新及其在国际货币体系中的地位产生深远影响。</p>
+            <div>
+                <h3 class="text-2xl font-semibold mb-3 text-[#0072BB]">未来展望</h3>
+                <ul class="list-disc list-inside space-y-2 text-md">
+                    <li><span class="font-semibold">更广泛的采用：</span>跨境支付、商家交易、DeFi等领域潜力巨大。</li>
+                    <li><span class="font-semibold">监管清晰化：</span>全球主要经济体正逐步完善监管框架，有望提升市场信心。</li>
+                    <li><span class="font-semibold">技术创新：</span>区块链技术和智能合约的进步将推动稳定币功能和效率的提升。</li>
+                    <li><span class="font-semibold">地缘政治影响：</span>稳定币日益成为国家数字金融战略和国际竞争的一部分。</li>
+                </ul>
             </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-[#0072BB] text-white text-center p-6 mt-12">
-        <p>&copy; 2025 稳定币市场研究。保留所有权利。</p>
-        <p class="text-sm">本信息图表内容基于公开研究报告，仅供参考。</p>
-    </footer>
-
-    <script>
-        const primaryColor = '#0072BB';
-        const secondaryColor = '#00AEEF';
-        const accentColor1 = '#89CFF0';
-        const accentColor2 = '#A0D2DB';
-        const accentColor3 = '#E0F2F7';
-        const textColor = '#1A202C';
-        const vibrantOrange = '#F7941D';
-        const vibrantRed = '#F15A24';
-
-        function processLabels(labels, maxLength = 16) {
-            return labels.map(label => {
-                if (typeof label === 'string' && label.length > maxLength) {
-                    const words = label.split(' ');
-                    const lines = [];
-                    let currentLine = '';
-                    for (const word of words) {
-                        if ((currentLine + word).length > maxLength && currentLine.length > 0) {
-                            lines.push(currentLine.trim());
-                            currentLine = word + ' ';
-                        } else {
-                            currentLine += word + ' ';
-                        }
-                    }
-                    lines.push(currentLine.trim());
-                    return lines;
-                }
-                return label;
-            });
-        }
-        
-        const commonTooltipCallback = {
-            title: function(tooltipItems) {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                  return label.join(' ');
-                } else {
-                  return label;
-                }
-            }
-        };
-
-        // Chart 1: Stablecoin Types
-        const stablecoinTypesCtx = document.getElementById('stablecoinTypesChart').getContext('2d');
-        new Chart(stablecoinTypesCtx, {
-            type: 'doughnut',
-            data: {
-                labels: processLabels(['法定货币支持 (如美元, 港元)', '加密货币支持', '算法稳定币']),
-                datasets: [{
-                    label: '稳定币类型构成',
-                    data: [99, 0.7, 0.3], // 基于报告中 ">99%" 的近似值
-                    backgroundColor: [secondaryColor, accentColor1, vibrantOrange],
-                    borderColor: [primaryColor, primaryColor, primaryColor],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'top', labels: { color: textColor } },
-                    title: { display: false, text: '稳定币类型构成', color: textColor, font: { size: 16}},
-                    tooltip: { callbacks: commonTooltipCallback }
-                }
-            }
-        });
-
-        // Chart 2: USD Market Share
-        const usdMarketShareCtx = document.getElementById('usdMarketShareChart').getContext('2d');
-        new Chart(usdMarketShareCtx, {
-            type: 'bar',
-            data: {
-                labels: processLabels(['Tether (USDT)', 'Circle (USDC)', 'Paxos (PYUSD, USDP)', '其他']),
-                datasets: [{
-                    label: '市场份额 (%)',
-                    data: [60, 26, 7, 7], // 基于报告中 "USDT 和 USDC 共同占据约86%" 的近似值
-                    backgroundColor: [secondaryColor, accentColor1, accentColor2, vibrantOrange],
-                    borderColor: primaryColor,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'y',
-                scales: {
-                    x: { beginAtZero: true, ticks: { color: textColor }, grid: { color: accentColor3 } },
-                    y: { ticks: { color: textColor }, grid: { display: false } }
-                },
-                plugins: {
-                    legend: { display: false },
-                    title: { display: false, text: '主要美元稳定币市场份额', color: textColor, font: {size: 16} },
-                    tooltip: { callbacks: commonTooltipCallback }
-                }
-            }
-        });
-
-        // Chart 3: USD Reserves Composition (Illustrative Stacked Bar)
-        const usdReservesCtx = document.getElementById('usdReservesChart').getContext('2d');
-        new Chart(usdReservesCtx, {
-            type: 'bar',
-            data: {
-                labels: processLabels(['典型美元稳定币储备']),
-                datasets: [
-                    {
-                        label: '现金及现金等价物',
-                        data: [35], // 示例数据
-                        backgroundColor: secondaryColor,
-                    },
-                    {
-                        label: '美国国债',
-                        data: [45], // 示例数据
-                        backgroundColor: accentColor1,
-                    },
-                    {
-                        label: '逆回购协议及其他短期投资',
-                        data: [20], // 示例数据
-                        backgroundColor: accentColor2,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: { stacked: true, ticks: { color: textColor }, grid: { display: false } },
-                    y: { stacked: true, beginAtZero: true, max: 100, ticks: { callback: function(value) {return value + "%"}, color: textColor }, grid: { color: accentColor3 } }
-                },
-                plugins: {
-                    legend: { position: 'top', labels: { color: textColor } },
-                    title: { display: false, text: '典型美元稳定币储备构成 (示例)', color: textColor, font: {size: 16} },
-                    tooltip: { 
-                        mode: 'index', 
-                        intersect: false,
-                        callbacks: {
-                             title: function(tooltipItems) { return tooltipItems[0].chart.data.labels[tooltipItems[0].dataIndex];}
-                        }
-                    }
-                }
-            }
-        });
-
-    </script>
-</body>
-</html>
+        </div>
+    </div>
+</section>
