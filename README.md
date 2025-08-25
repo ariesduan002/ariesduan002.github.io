@@ -5,3 +5,4 @@
 [美版稳定币和港币的区别]((https://ariesduan002.github.io/stablecoin.html)
 
 [时间的本质](https://ariesduan002.github.io/abouttime.html)
+【社会阶梯的构建】（https://ariesduan002.github.io/socialladder.html）
